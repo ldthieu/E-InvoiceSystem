@@ -23,8 +23,8 @@ public class User implements Serializable {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -44,16 +44,16 @@ public class User implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+    
+    public String getUsername() {
+		return username;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
+	public String getPassword() {
         return password;
     }
 
