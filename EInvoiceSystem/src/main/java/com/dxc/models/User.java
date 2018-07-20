@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -30,7 +32,8 @@ public class User implements Serializable {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name = "fuullname")
+	@Column(name = "fullname")
+	@Length(max = 100)
 	@Basic(optional = false)
 	private String fullName;
 
@@ -96,6 +99,22 @@ public class User implements Serializable {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }
