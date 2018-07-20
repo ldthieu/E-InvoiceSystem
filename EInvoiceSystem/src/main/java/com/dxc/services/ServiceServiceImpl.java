@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.dxc.models.Service;
 import com.dxc.repository.ServiceRepository;
 
+@org.springframework.stereotype.Service("serviceService")
 public class ServiceServiceImpl implements ServiceService {
 
 	@Autowired

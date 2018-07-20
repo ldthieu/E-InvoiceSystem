@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Register Page</title>
+<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+	<div class="main-content">
+		<p th:if="${param.error}" class="error">Invalid email or password</p>
+		<p th:if="${param.logout}" class="success">You have been logged out</p>
+		<h3>Register</h3>
+		<form th:action="@{/service}" method="POST">
+			<input type="text" name="serviceName" placeholder="serviceName" /><br />
+			<button type="submit">Create</button> <br />
+		</form>
+	</div>
+</body>
+</html>
