@@ -32,4 +32,9 @@ public class MainController {
 		return "register";
 	}
 	
+	@GetMapping("/service")
+	public String service() {
+		return "service";
+	}
+	
 }
