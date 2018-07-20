@@ -7,11 +7,9 @@
 </head>
 <body>
 	<div class="main-content">
-		<p th:if="${param.error}" class="error">Invalid email or password</p>
-		<p th:if="${param.logout}" class="success">You have been logged out</p>
 		<h3>Register</h3>
 		<form th:action="@{/register}" method="POST">
-			<input type="text" name="email" placeholder="Your email" /><br />
+			<input type="text" name="username" placeholder="Your username" /><br />
 			<input type="password" name="password" placeholder="Your password" /><br />
 			<button type="submit">submit</button> <br />
 		</form>
