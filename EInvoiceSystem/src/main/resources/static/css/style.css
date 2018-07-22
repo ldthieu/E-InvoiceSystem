@@ -7,12 +7,14 @@
 	display: block;
 	text-align: center;
 	color: green;
+	margin-bottom: 15px;
 }
 
 .error {
 	display: block;
 	text-align: center;
 	color: red;
+	margin-bottom: 15px;
 }
 
 .field-error {

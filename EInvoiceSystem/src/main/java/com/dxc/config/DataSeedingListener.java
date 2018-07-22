@@ -12,6 +12,7 @@ import com.dxc.models.Role;
 import com.dxc.models.User;
 import com.dxc.repository.RoleRepository;
 import com.dxc.repository.UserRepository;
+import com.dxc.services.UserService;
 
 @Component
 public class DataSeedingListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -60,6 +61,15 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			user.setRoles(roles);
 			userRepository.save(user);
 		}
+		
+		System.out.println("**********************************");
+		if(userRepository.findByEmail("abc") == null) {
+			System.out.println("null");
+		}else {
+			System.out.println("not null");
+		}
+		
+		System.out.println("**********************************");
 	}
 
 }
