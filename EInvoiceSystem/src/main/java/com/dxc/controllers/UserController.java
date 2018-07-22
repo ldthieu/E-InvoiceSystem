@@ -34,23 +34,18 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/register", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Void> register(@RequestBody User res, UriComponentsBuilder ucBuilder) {;
-
-//		System.out.println(res.toString());
-//		System.out.println(res.getEmail());
-//		System.out.println(res.getFullName());
-//		System.out.println(res.getPassword());
+	public ResponseEntity<Void> register(@RequestBody User res, UriComponentsBuilder ucBuilder) {
 		User user = new User();
 		user.setEmail(res.getEmail());
 		user.setActive(true);
 		user.setPassword(passwordEncoder.encode(res.getPassword()));
-		user.setFullName(res.getFullName());
+		user.setFullname(res.getFullname());
 		HashSet<Role> roles = new HashSet<>();
 		roles.add(roleService.findByName("ROLE_MEMBER"));
 		user.setRoles(roles);
 		userService.saveUser(user);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(res.getId()).toUri());
-		return new ResponseEntity<Void>(headers, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 }

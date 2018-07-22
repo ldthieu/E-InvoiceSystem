@@ -27,6 +27,7 @@ public class User implements Serializable {
 	private int id;
 
 	@Column(name = "email", nullable = false, unique = true)
+	@Length(max = 100)
 	private String email;
 
 	@Column(name = "password", nullable = false)
@@ -35,7 +36,7 @@ public class User implements Serializable {
 	@Column(name = "fullname")
 	@Length(max = 100)
 	@Basic(optional = false)
-	private String fullName;
+	private String fullname;
 
 	@Column(name = "active")
 	@Basic(optional = false)
@@ -101,12 +102,12 @@ public class User implements Serializable {
 		this.roles = roles;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getFullname() {
+		return fullname;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 	public boolean isActive() {

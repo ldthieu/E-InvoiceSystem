@@ -28,18 +28,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/index.html", "/login.html", "/partials/**", "/", "/error/**", "/user/register", "/user/getEmail/**"
-				 );
-	}
+//	@Override
+//	public void configure(WebSecurity web) throws Exception {
+//		web.ignoring().antMatchers("/user/register");
+//	}
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/register","/user/register").permitAll()
-                .antMatchers("/").hasRole("MEMBER")
+                .antMatchers("/register", "user/register").permitAll()
+                .antMatchers("/").hasRole("ADMIN")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and()
             .formLogin()
@@ -48,6 +47,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             	.passwordParameter("password")
             	.defaultSuccessUrl("/")
             	.failureUrl("/login?error")
+            	.and()
+            	.csrf()
+            	.ignoringAntMatchers("/user/register", "/")
             	.and()
         	.exceptionHandling()
     			.accessDeniedPage("/403");

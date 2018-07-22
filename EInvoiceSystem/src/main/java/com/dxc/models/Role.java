@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Table(name = "role")
 public class Role implements Serializable {
@@ -22,6 +24,7 @@ public class Role implements Serializable {
     private int id;
 
     @Column(name = "name", nullable = false)
+    @Length(max = 100)
     private String name;
 
     @ManyToMany(mappedBy = "roles")

@@ -4,10 +4,14 @@
 }
 
 .success {
+	display: block;
+	text-align: center;
 	color: green;
 }
 
 .error {
+	display: block;
+	text-align: center;
 	color: red;
 }
 
