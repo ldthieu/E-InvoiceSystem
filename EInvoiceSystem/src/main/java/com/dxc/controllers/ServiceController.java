@@ -43,7 +43,7 @@ public class ServiceController {
 		return user;
 	}
 	
-	@RequestMapping(value = "/service", method = RequestMethod.POST)
+	@RequestMapping(value = "/services", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<List<Service>> getListService(){
 		List<Service> service = serviceRepository.findByUser(getUser());
