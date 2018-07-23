@@ -43,6 +43,7 @@
 					</span>
 					<span th:if="${param.error}" class="error p-b-12">Invalid email or password</span>
 					<span th:if="${param.logout}" class="success p-b-12">You have been logged out</span>
+					<span th:if="${param.register}" class="success p-b-12">You have successfully registered</span>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
 						<input class="input100" type="text" name="email">
 						<span class="focus-input100" data-placeholder="Email"></span>

@@ -48,6 +48,14 @@
             }
         }
         else {
+        	if($(input).attr('name') == 'repassword'){
+        		console.log($('input[name=password]').val());
+				console.log($(input).val());
+        		if($('input[name=password]').val() !== $(input).val()){
+        			$(input).parent().attr("data-validate", "Confirm password mismatch!");
+        			return false;
+        		}
+        	}
             if($(input).val().trim() == ''){
                 return false;
             }
