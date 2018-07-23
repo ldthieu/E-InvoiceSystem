@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<title>Register Page</title>
-<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-</head>
-<body>
-	<div class="main-content">
-		<p th:if="${param.error}" class="error">Invalid email or password</p>
-		<p th:if="${param.logout}" class="success">You have been logged out</p>
-		<h3>Register</h3>
-		<form th:action="@{/service}" method="POST">
-			<input type="text" name="serviceName" placeholder="serviceName" /><br />
-			<button type="submit">Create</button> <br />
-		</form>
-	</div>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body ng-app="myApp" ng-controller="myCtrl">
+<p>Today's welcome message is:</p>
+<form method="POST">
+			<input type="text" name="serviceName" placeholder="Your Service" ng-model="name"/><br />
+			<button type="submit" ng-click="senData()">Login</button> <br />
+</form>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+	$scope.name = "";
+	$scope.senData=function(){
+		$http({
+			method: 'POST',
+			url: 'service/create',
+			data: {'serviceName': $scope.name}
+			})
+		
+	     .then(
+	    function(response) {
+	            // success
+	           console.log(response);
+	    }, 
+	    function(response) { // optional
+	            // failed
+	    	console.log(response) 
+	    }
+	    ); 
+	}
+	
+// }
+}
+);
+</script>
+
 </body>
 </html>
