@@ -21,8 +21,7 @@ import com.dxc.models.User;
 import com.dxc.repository.ServiceRepository;
 import com.dxc.repository.UserRepository;
 import com.dxc.services.ServiceService;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 
 @RestController
 public class ServiceController {
@@ -36,7 +35,7 @@ public class ServiceController {
 	@Autowired
 	ServiceService serviceService;
 	
-	public User getUser(@RequestBody Service ser, UriComponentsBuilder ucBuilder){
+	public User getUser(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User user = new User();
@@ -46,9 +45,12 @@ public class ServiceController {
 	
 	@RequestMapping(value = "/service", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Service> getListService(@RequestBody Service ser, UriComponentsBuilder ucBuilder){
-		List<Service> service = serviceRepository.findByUser(getUser(ser, ucBuilder));
-		return service;
+	public ResponseEntity<List<Service>> getListService(){
+		List<Service> service = serviceRepository.findByUser(getUser());
+		if(service==null) {
+			return new ResponseEntity<List<Service>>(service,HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Service>>(service,HttpStatus.OK);
 	}
 	
 	
@@ -65,7 +67,7 @@ public class ServiceController {
 			
 			Service service = new Service();
 			service.setServiceName(ser.getServiceName());
-			service.setUser(getUser(ser,ucBuilder));
+			service.setUser(getUser());
 			serviceService.saveService(service);
 			
 			HttpHeaders headers = new HttpHeaders();
@@ -91,7 +93,7 @@ public class ServiceController {
 			
 			Service service = new Service();
 			service.setServiceName(ser.getServiceName());
-			service.setUser(getUser(ser,ucBuilder));
+			service.setUser(getUser());
 			serviceService.updateService(service);
 			
 			HttpHeaders headers = new HttpHeaders();
