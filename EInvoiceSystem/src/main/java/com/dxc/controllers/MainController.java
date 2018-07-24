@@ -31,10 +31,10 @@ public class MainController {
 	public String register() {
 		return "register";
 	}
+
 	
 	@GetMapping("/service")
 	public String service() {
 		return "service";
 	}
-	
 }
