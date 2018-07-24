@@ -33,9 +33,15 @@ public class Service implements Serializable {
     @Length(max = 100)
     private String serviceName;
     
+    @Column(name = "is_monthly")
+    @Basic(optional = false)
+    boolean isMonthly;
+    
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+    
+    
 
 	public String getServiceName() {
 		return serviceName;
@@ -60,5 +66,15 @@ public class Service implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public boolean isMonthly() {
+		return isMonthly;
+	}
+
+	public void setMonthly(boolean isMonthly) {
+		this.isMonthly = isMonthly;
+	}
+	
+	
     
 }
