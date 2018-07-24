@@ -68,6 +68,7 @@ public class ServiceController {
 			Service service = new Service();
 			service.setServiceName(ser.getServiceName());
 			service.setUser(getUser());
+			service.setMonthly(ser.isMonthly());
 			serviceService.saveService(service);
 			
 			HttpHeaders headers = new HttpHeaders();
