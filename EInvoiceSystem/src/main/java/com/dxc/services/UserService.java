@@ -1,10 +1,13 @@
 package com.dxc.services;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.dxc.models.User;
 
 public interface UserService {
 	
-	void saveUser(User user);
+	HttpStatus register(@RequestBody User req);
 	
 	User findById(int id);
 	
