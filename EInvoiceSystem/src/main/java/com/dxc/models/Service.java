@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "service")
 public class Service implements Serializable {
@@ -34,11 +36,12 @@ public class Service implements Serializable {
     private String serviceName;
     
     @Column(name = "is_monthly")
-    @Basic(optional = false)
+//    @Basic(optional = false)
     boolean isMonthly;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
     private User user;
     
     

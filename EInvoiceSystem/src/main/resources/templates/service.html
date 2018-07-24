@@ -1,15 +1,62 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<script src="../static/js/lib/angular.js" th:src="@{/js/lib/angular.js}"></script>
-<body ng-app="myApp" ng-controller="serviceController">
-<p>Today's welcome message is:</p>
-<form method="POST">
-			<input type="text" name="serviceName" placeholder="Your Service" ng-model="name"/><br />
-			<button type="submit" ng-click="senData()">Login</button> <br />
-</form>
-
-
-<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
-<script src="../static/js/controllers/serviceController.js" th:src="@{/js/controllers/serviceController.js}"></script>
-</body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>AngularJS</title>
+      <script src="../static/js/lib/angular.js" th:src="@{/js/lib/angular.js}"></script>
+      <script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+      <script src="../static/js/controllers/serviceController.js" th:src="@{/js/controllers/serviceController.js}"></script>
+    
+       
+      <link rel="stylesheet" type="text/css" href="../static/css/service.css" th:href="@{/css/service.css}">
+       
+      <head>
+   <body ng-app="myApp" ng-controller="ServiceController">
+      <h3>
+         CRUD: Spring Boot + Rest + AngularJS
+      </h3>
+      <form ng-submit="submitService()">
+         <table border="0">
+<!--             <tr> -->
+<!--                <td>Emp Id</td> -->
+<!--                <td>{{employeeForm.empId}}</td> -->
+<!--             </tr> -->
+            <tr>
+               <td>Name</td>
+               <td><input type="text" ng-model="serviceForm.serName" /></td>
+            </tr>
+            <tr>
+               <td>ID</td>
+               <td><input type="text" ng-model="serviceForm.monthly"  /></td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <input type="submit" value="Submit" class="blue-button" />
+               </td>
+            </tr>
+         </table>
+      </form>
+      <br/>
+      <a class="create-button" ng-click="createService()">Create Service</a>
+      <table border="1">
+         <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Monthly</th>
+            <th>Edit</th>
+            <th>Delete</th>
+         </tr>
+         <!-- $scope.employees -->
+         <tr ng-repeat="service in services">
+            <td> {{ service.id }}</td>
+            <td> {{ service.serviceName }}</td>
+            <td >{{ service.monthly }}</td>
+            <td>
+            <a ng-click="editService(service)" class="edit-button">Edit</a>
+            </td>
+            <td>
+            <a ng-click="deleteEmployee(employee)" class="delete-button">Delete</a>
+            </td>
+         </tr>
+      </table>
+   </body>
 </html>

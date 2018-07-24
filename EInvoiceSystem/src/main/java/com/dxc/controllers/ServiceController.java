@@ -21,6 +21,8 @@ import com.dxc.models.User;
 import com.dxc.repository.ServiceRepository;
 import com.dxc.repository.UserRepository;
 import com.dxc.services.ServiceService;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @RestController
@@ -43,7 +45,11 @@ public class ServiceController {
 		return user;
 	}
 	
-	@RequestMapping(value = "/services", method = RequestMethod.POST)
+	@RequestMapping(value = "/services", //
+	            method = RequestMethod.GET, //
+	            produces = { MediaType.APPLICATION_JSON_VALUE, //
+	                    MediaType.APPLICATION_XML_VALUE })
+	@JsonBackReference
 	@ResponseBody
 	public ResponseEntity<List<Service>> getListService(){
 		List<Service> service = serviceRepository.findByUser(getUser());
@@ -81,20 +87,23 @@ public class ServiceController {
 		}
 	}
 	
-	@RequestMapping(value = "/service/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/service/update", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<Void> updateService(@RequestBody Service ser, UriComponentsBuilder ucBuilder) {
 		
 		if (ser.getServiceName()==null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-		
-		if(serviceRepository.findByServiceName(ser.getServiceName())!=null){
+		Service service = serviceRepository.findById(ser.getId());
+		System.out.println("----------------------------------------------------------");
+		System.out.println(ser.getId());
+		System.out.println("----------------------------------------------------------");
+		if(service!=null){
 			
 			
-			Service service = new Service();
 			service.setServiceName(ser.getServiceName());
 			service.setUser(getUser());
+			service.setMonthly(ser.isMonthly());
 			serviceService.updateService(service);
 			
 			HttpHeaders headers = new HttpHeaders();
@@ -105,6 +114,7 @@ public class ServiceController {
 		{
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
+
 	}
 		
 		
