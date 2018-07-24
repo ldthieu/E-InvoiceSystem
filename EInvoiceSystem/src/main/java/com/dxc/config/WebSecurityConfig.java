@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             	.failureUrl("/login?error")
             	.and()
             	.csrf()
-            	.ignoringAntMatchers("/user/register","/service/create", "/invoice/**", "/services")
+            	.ignoringAntMatchers("/user/register","/service/**", "/invoice/**")
             	.and()
         	.exceptionHandling()
     			.accessDeniedPage("/403");
