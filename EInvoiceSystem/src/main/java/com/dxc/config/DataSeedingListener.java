@@ -9,8 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.dxc.models.Role;
+import com.dxc.models.Service;
 import com.dxc.models.User;
 import com.dxc.repository.RoleRepository;
+import com.dxc.repository.ServiceRepository;
 import com.dxc.repository.UserRepository;
 import com.dxc.services.UserService;
 
@@ -22,6 +24,9 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private ServiceRepository serviceRepository;
 	
 	@Autowired 
 	private PasswordEncoder passwordEncoder;
@@ -48,6 +53,13 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			roles.add(roleRepository.findByName("ROLE_MEMBER"));
 			admin.setRoles(roles);
 			userRepository.save(admin);
+			
+			Service service = new Service();
+			service.setMonthly(true);
+			service.setServiceName("Electric");
+			service.setUser(admin);
+			
+			serviceRepository.save(service);
 		}
 		
 		// Member account
@@ -60,7 +72,11 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			roles.add(roleRepository.findByName("ROLE_MEMBER"));
 			user.setRoles(roles);
 			userRepository.save(user);
+			
+			
 		}
+		
+		
 		
 		System.out.println("**********************************");
 		if(userRepository.findByEmail("abc") == null) {

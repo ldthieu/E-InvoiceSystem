@@ -105,13 +105,12 @@
 									<div class="col-md-6">
 <!-- 										<h3>Basic Form Examples</h3> -->
 										<form role="form">
-											<div class="form-group">
+											<div class="form-group" ng-init="init()">
 	                                            <label>Select Service</label>
 	                                            <select class="form-control" ng-model="service">
-	                                                <option>One Vale</option>
-	                                                <option>Two Vale</option>
-	                                                <option>Three Vale</option>
-	                                                <option>Four Vale</option>
+	                                            	<option ng-selected= "{{s.serviceName == service}}" ng-repeat="s in services" value="{{s}}">
+	                                            		{{s.serviceName}}
+	                                            	</option>
 	                                            </select>
 	                                        </div>
 											<div class="form-group">
@@ -134,7 +133,7 @@
 												<label>Invoice date</label>
 												<input class="form-control" type="date" ng-model="createdDate" />
 											</div>
-											<button type="submit" class="btn btn-default">Submit Button</button>
+											<button type="submit" class="btn btn-default" ng-click="abc()">Submit Button</button>
 											<button type="reset" class="btn btn-primary">Reset Button</button>
 										</form>
 									</div>
