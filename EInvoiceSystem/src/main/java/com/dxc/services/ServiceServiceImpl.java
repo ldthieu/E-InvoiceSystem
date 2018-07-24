@@ -30,4 +30,10 @@ public class ServiceServiceImpl implements ServiceService {
 		serviceRepository.deleteById(id);
 	}
 
+	@Override
+	public Service findById(int id) {
+		// TODO Auto-generated method stub
+		return serviceRepository.findById(id);
+	}
+
 }

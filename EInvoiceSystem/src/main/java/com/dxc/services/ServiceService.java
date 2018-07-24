@@ -10,4 +10,6 @@ public interface ServiceService {
 	void updateService(Service service);
 	
 	void deleteServiceById(int id);
+	
+	Service findById(int id);
 }

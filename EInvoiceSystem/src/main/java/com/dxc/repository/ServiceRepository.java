@@ -13,4 +13,5 @@ import com.dxc.models.User;
 public interface ServiceRepository extends CrudRepository<Service, Integer>, JpaRepository<Service, Integer>{
 	List <Service> findByUser(User user);
 	Service findByServiceName(String serviceName);
+	Service findById(int id);
 }

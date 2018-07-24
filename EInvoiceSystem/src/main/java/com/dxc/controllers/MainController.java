@@ -37,4 +37,8 @@ public class MainController {
 		return "service";
 	}
 	
+	@GetMapping("/invoice/create")
+	public String createInvoice() {
+		return "invoice-create";
+	}
 }

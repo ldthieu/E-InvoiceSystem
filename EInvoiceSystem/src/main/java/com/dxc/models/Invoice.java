@@ -50,9 +50,9 @@ public class Invoice implements Serializable {
 	private double vat;
 	
 	@Basic(optional = false)
-	@Column(name = "date")
+	@Column(name = "created_date")
 	@Temporal(TemporalType.DATE)
-	private Date date;
+	private Date createdDate;
 
 	public int getId() {
 		return id;
@@ -110,12 +110,12 @@ public class Invoice implements Serializable {
 		this.vat = vat;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 }

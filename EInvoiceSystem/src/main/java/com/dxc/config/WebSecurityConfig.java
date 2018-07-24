@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             	.antMatchers("/service").authenticated()
-                .antMatchers("/register", "user/register").permitAll()
+                .antMatchers("/register", "/user/register").permitAll()
                 .antMatchers("/").hasRole("MEMBER")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and()
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             	.failureUrl("/login?error")
             	.and()
             	.csrf()
-            	.ignoringAntMatchers("/user/register","/service/create")
+            	.ignoringAntMatchers("/user/register","/service/create", "/invoice/**", "/services")
             	.and()
         	.exceptionHandling()
     			.accessDeniedPage("/403");
