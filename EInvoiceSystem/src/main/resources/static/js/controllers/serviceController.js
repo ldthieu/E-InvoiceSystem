@@ -36,10 +36,11 @@ app.controller("ServiceController", function($scope, $http) {
 
 	// HTTP DELETE- delete employee by Id
 	// Call: http://localhost:8080/employee/{empId}
-	$scope.deleteService = function(employee) {
+			  
+	$scope.deleteService = function(service) {
 		$http({
 			method : 'DELETE',
-			url : '/employee/' + employee.empId
+			url : '/service/' + service.id
 		}).then(_success, _error);
 	};
 	// In case of edit
@@ -56,9 +57,9 @@ app.controller("ServiceController", function($scope, $http) {
 	function _refreshServiceSData() {
 		$http.get('/service/get').then(function(res) { // success
 			$scope.services = res.data;
-			console.log("success: " + res.status + " : " + res.data);
+			console.log(res);
 		}, function(res) { // error
-			console.log("Error: " + res.status + " : " + res.data);
+			console.log(res);
 		});
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import com.dxc.repository.ServiceRepository;
 import com.dxc.repository.UserRepository;
 import com.dxc.services.ServiceService;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @RestController
 public class ServiceController {
@@ -42,14 +44,18 @@ public class ServiceController {
 		return user;
 	}
 
+	public User getAdminUser() {
+		User admin = userRepository.findByEmail("admin@gmail.com");
+		return admin;
+	}
+
 	@RequestMapping(value = "/service/get", //
 			method = RequestMethod.GET, //
 			produces = { MediaType.APPLICATION_JSON_VALUE, //
 					MediaType.APPLICATION_XML_VALUE })
-	@JsonBackReference
 	@ResponseBody
 	public ResponseEntity<List<Service>> getListService() {
-		List<Service> service = serviceRepository.findByUser(getUser());
+		List<Service> service = serviceRepository.findByUserOrUser(getAdminUser(), getUser());
 		if (service == null) {
 			return new ResponseEntity<List<Service>>(service, HttpStatus.NO_CONTENT);
 		}
@@ -99,6 +105,21 @@ public class ServiceController {
 		} else {
 			return HttpStatus.CONFLICT;
 		}
+
+	}
+
+	@RequestMapping(value = "/service/{serviceId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public HttpStatus deleteService(@PathVariable("serviceId") int serviceId) {
+		List<Service> service = serviceRepository.findByUser(getUser());
+		if(service.contains(serviceRepository.findById(serviceId))) {
+			serviceService.deleteServiceById(serviceId);
+			return HttpStatus.OK;
+		}
+		else {
+			return HttpStatus.NOT_ACCEPTABLE;
+		}
+		
 
 	}
 

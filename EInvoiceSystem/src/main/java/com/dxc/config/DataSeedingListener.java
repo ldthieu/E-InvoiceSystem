@@ -58,14 +58,28 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			service.setMonthly(true);
 			service.setServiceName("Electric");
 			service.setUser(admin);
-
 			serviceRepository.save(service);
+			
+			Service service1 = new Service();
+			service1.setServiceName("Internet");
+			service1.setUser(admin);
+			serviceRepository.save(service1);
+			
+			Service service2 = new Service();
+			service2.setServiceName("Telephone");
+			service2.setUser(admin);
+			serviceRepository.save(service2);
+			
+			Service service3 = new Service();
+			service3.setServiceName("Water");
+			service3.setUser(admin);
+			serviceRepository.save(service3);
 		}
 
 		// Member account
-		if (userRepository.findByEmail("member@gmail.com") == null) {
+		if (userRepository.findByEmail("bvn@gmail.com") == null) {
 			User user = new User();
-			user.setEmail("member@gmail.com");
+			user.setEmail("bvn@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456"));
 			user.setFullname("member");
 			HashSet<Role> roles = new HashSet<>();
@@ -73,24 +87,19 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			user.setRoles(roles);
 			userRepository.save(user);
 			
-			
-			
-			
-			
-			
-			Service service = new Service();
-			service.setServiceName("abc");
-			service.setUser(user);
-			serviceRepository.save(service);
 		}
-		User user1 = new User();
-		user1.setEmail("bvn@gmail.com");
-		user1.setPassword(passwordEncoder.encode("123456"));
-		user1.setFullname("bvn");
-		HashSet<Role> roles = new HashSet<>();
-		roles.add(roleRepository.findByName("ROLE_MEMBER"));
-		user1.setRoles(roles);
-		userRepository.save(user1);
+		
+		if (userRepository.findByEmail("ldth@gmail.com") == null) {
+			User user = new User();
+			user.setEmail("ldth@gmail.com");
+			user.setPassword(passwordEncoder.encode("123456"));
+			user.setFullname("member");
+			HashSet<Role> roles = new HashSet<>();
+			roles.add(roleRepository.findByName("ROLE_MEMBER"));
+			user.setRoles(roles);
+			userRepository.save(user);
+			
+		}
 	}
 
 }
