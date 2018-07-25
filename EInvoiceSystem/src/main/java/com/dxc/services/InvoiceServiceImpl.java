@@ -61,7 +61,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	@Override
-	public ResponseEntity<List<Invoice>> getInvoice() {
+	public ResponseEntity<List<Invoice>> getInvoices() {
 		// TODO Auto-generated method stub
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
@@ -73,6 +73,41 @@ public class InvoiceServiceImpl implements InvoiceService {
 			return new ResponseEntity<List<Invoice>>(list, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<List<Invoice>>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+
+	@Override
+	public ResponseEntity<Invoice> getInvoiceById(int id) {
+		// TODO Auto-generated method stub
+		Invoice invoice = invoiceRepository.findById(id);
+		if (invoice == null) {
+			return new ResponseEntity<Invoice>(HttpStatus.BAD_REQUEST);
+		} else {
+			return new ResponseEntity<Invoice>(invoice, HttpStatus.OK);
+		}
+	}
+
+	@Override
+	public ResponseEntity<Void> deleteInvoice(int id) {
+		// TODO Auto-generated method stub
+		Invoice invoice = invoiceRepository.findById(id);
+		if (invoice == null) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} else {
+			invoiceRepository.delete(invoice);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+	}
+
+	@Override
+	public ResponseEntity<Void> updateInvoice(Invoice invoice) {
+		// TODO Auto-generated method stub
+		Invoice in = invoiceRepository.findById(invoice.getId());
+		if (in == null) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} else {
+			invoiceRepository.save(invoice);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 	}
 

@@ -12,5 +12,11 @@ public interface InvoiceService {
 
 	HttpStatus createInvoice(@RequestBody Invoice invoice);
 	
-	ResponseEntity<List<Invoice>> getInvoice();
+	ResponseEntity<List<Invoice>> getInvoices();
+	
+	ResponseEntity<Invoice> getInvoiceById(int id);
+	
+	ResponseEntity<Void> deleteInvoice(int id);
+	
+	ResponseEntity<Void> updateInvoice(Invoice invoice);
 }

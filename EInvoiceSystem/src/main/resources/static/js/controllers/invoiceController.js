@@ -5,14 +5,8 @@
  */
 
 //	Controller
-app.controller("InvoiceController", function($scope, $http, $window){
+app.controller("InvoiceController", function($scope, $http, $window, $timeout){
 	
-//	$scope.invoiceNo = "";
-//	$scope.customerCode = "";
-//	$scope.amountOfMoney = 0;
-//	$scope.vat = 0;
-//	$scope.createdDate = new Date();
-//	$scope.service = {};
 	$scope.services = [];
 	$scope.getInvoice = function(){
 		$http.get("/invoice/get")
@@ -25,4 +19,20 @@ app.controller("InvoiceController", function($scope, $http, $window){
 		    }
 	    );
 	};
+	
+	$scope.delete = function(id){
+		console.log(id)
+		var r = confirm("Press OK to delete this invoice!");
+		if (r == true){
+			$http.delete("/invoice/delete/"+id)
+			    .then(function (response) {
+			    	console.log(response);
+			    	$window.location.href = '/invoice';
+			    },
+			    function(errResponse){
+			    	console.log(errResponse);
+			    }
+		    );
+		}
+	}
 });

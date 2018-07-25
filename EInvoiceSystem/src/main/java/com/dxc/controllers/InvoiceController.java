@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,9 +40,21 @@ public class InvoiceController {
 			produces = { MediaType.APPLICATION_JSON_VALUE, //
 					MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
-	public ResponseEntity<List<Invoice>> getInvoice() {
+	public ResponseEntity<List<Invoice>> getInvoices() {
 
-		return invoiceService.getInvoice();
+		return invoiceService.getInvoices();
+	}
+
+	@RequestMapping(value = "/invoice/get/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Invoice> getInvoiceById(@PathVariable("id") int id) {
+		return invoiceService.getInvoiceById(id);
+	}
+	
+	@RequestMapping(value = "/invoice/delete/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<Void> deleteService(@PathVariable("id") int id) {
+		return invoiceService.deleteInvoice(id);
 	}
 
 }

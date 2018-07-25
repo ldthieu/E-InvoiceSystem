@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class MainController {
@@ -46,6 +47,11 @@ public class MainController {
 	@GetMapping("/invoice/create")
 	public String createInvoice() {
 		return "invoice-create";
+	}
+	
+	@GetMapping("/invoice/update/{id}")
+	public String updateInvoice(@PathVariable String id) {
+		return "invoice-update";
 	}
 	
 	@GetMapping("/invoice")

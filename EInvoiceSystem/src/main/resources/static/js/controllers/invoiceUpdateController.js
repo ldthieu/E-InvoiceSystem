@@ -3,7 +3,7 @@
  */
 
 // Controller
-app.controller("InvoiceCreateController", function($scope, $http, $window) {
+app.controller("InvoiceUpdateController", function($scope, $http, $window) {
 
 	$scope.invoiceNo = "";
 	$scope.customerCode = "";
