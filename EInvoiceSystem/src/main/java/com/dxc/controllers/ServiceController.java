@@ -67,16 +67,16 @@ public class ServiceController {
 	public HttpStatus createService(@RequestBody Service ser, UriComponentsBuilder ucBuilder) {
 
 		if (ser.getServiceName() == null) {
-			return HttpStatus.NO_CONTENT;
+			return HttpStatus.BAD_REQUEST;
 		}
 
 		if (serviceRepository.findByServiceNameAndUser(ser.getServiceName(), getUser()) == null) {
 
-			Service service = new Service();
-			service.setServiceName(ser.getServiceName());
-			service.setUser(getUser());
-			service.setMonthly(ser.isMonthly());
-			serviceService.saveService(service);
+//			Service service = new Service();
+//			service.setServiceName(ser.getServiceName());
+			ser.setUser(getUser());
+//			service.setMonthly(ser.isMonthly());
+			serviceService.saveService(ser);
 
 			return HttpStatus.CREATED;
 		} else {
