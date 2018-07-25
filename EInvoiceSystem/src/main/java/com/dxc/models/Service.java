@@ -30,7 +30,7 @@ public class Service implements Serializable {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "service_name", unique = true)
+    @Column(name = "service_name")
     @Basic(optional = false)
     @Length(max = 100)
     private String serviceName;

@@ -18,30 +18,30 @@ import com.dxc.services.UserService;
 
 @Component
 public class DataSeedingListener implements ApplicationListener<ContextRefreshedEvent> {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
 	@Autowired
 	private ServiceRepository serviceRepository;
-	
-	@Autowired 
+
+	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		// Roles
 		if (roleRepository.findByName("ROLE_ADMIN") == null) {
 			roleRepository.save(new Role("ROLE_ADMIN"));
 		}
-		
+
 		if (roleRepository.findByName("ROLE_MEMBER") == null) {
 			roleRepository.save(new Role("ROLE_MEMBER"));
 		}
-		
+
 		// Admin account
 		if (userRepository.findByEmail("admin@gmail.com") == null) {
 			User admin = new User();
@@ -53,15 +53,15 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			roles.add(roleRepository.findByName("ROLE_MEMBER"));
 			admin.setRoles(roles);
 			userRepository.save(admin);
-			
+
 			Service service = new Service();
 			service.setMonthly(true);
 			service.setServiceName("Electric");
 			service.setUser(admin);
-			
+
 			serviceRepository.save(service);
 		}
-		
+
 		// Member account
 		if (userRepository.findByEmail("member@gmail.com") == null) {
 			User user = new User();
@@ -74,18 +74,23 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			userRepository.save(user);
 			
 			
+			
+			
+			
+			
+			Service service = new Service();
+			service.setServiceName("abc");
+			service.setUser(user);
+			serviceRepository.save(service);
 		}
-		
-		
-		
-		System.out.println("**********************************");
-		if(userRepository.findByEmail("abc") == null) {
-			System.out.println("null");
-		}else {
-			System.out.println("not null");
-		}
-		
-		System.out.println("**********************************");
+		User user1 = new User();
+		user1.setEmail("bvn@gmail.com");
+		user1.setPassword(passwordEncoder.encode("123456"));
+		user1.setFullname("bvn");
+		HashSet<Role> roles = new HashSet<>();
+		roles.add(roleRepository.findByName("ROLE_MEMBER"));
+		user1.setRoles(roles);
+		userRepository.save(user1);
 	}
 
 }
