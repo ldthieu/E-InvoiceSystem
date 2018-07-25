@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "service")
@@ -30,7 +32,7 @@ public class Service implements Serializable {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "service_name", unique = true)
+    @Column(name = "service_name")
     @Basic(optional = false)
     @Length(max = 100)
     private String serviceName;
@@ -41,7 +43,7 @@ public class Service implements Serializable {
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonManagedReference
     private User user;
     
     

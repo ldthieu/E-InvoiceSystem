@@ -16,6 +16,9 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -43,6 +46,7 @@ public class User implements Serializable {
 	private boolean active;
 
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
