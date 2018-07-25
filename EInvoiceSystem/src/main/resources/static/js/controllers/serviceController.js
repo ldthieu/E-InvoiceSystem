@@ -38,10 +38,7 @@ app.controller("ServiceController", function($scope, $http) {
 	// Call: http://localhost:8080/employee/{empId}
 			  
 	$scope.deleteService = function(service) {
-		$http({
-			method : 'DELETE',
-			url : '/service/' + service.id
-		}).then(_success, _error);
+		$http.delete('/service/' + service.id).then(_success, _error);
 	};
 	// In case of edit
 	$scope.editService = function(service) {
@@ -74,6 +71,7 @@ app.controller("ServiceController", function($scope, $http) {
 		var status = res.status;
 		var header = res.header;
 		var config = res.config;
+		$scope.serviceForm.update = 1;
 		alert("Error: " + status + ":" + data);
 	}
 

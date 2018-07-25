@@ -43,7 +43,7 @@ public class Service implements Serializable {
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonManagedReference
+    @JsonBackReference
     private User user;
     
     
