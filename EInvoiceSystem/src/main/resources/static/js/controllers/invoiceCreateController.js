@@ -2,9 +2,9 @@
  * 
  */
 
-//	Controller
-app.controller("InvoiceCreateController", function($scope, $http, $window){
-	
+// Controller
+app.controller("InvoiceCreateController", function($scope, $http, $window) {
+
 	$scope.invoiceNo = "";
 	$scope.customerCode = "";
 	$scope.amountOfMoney = 0;
@@ -12,46 +12,61 @@ app.controller("InvoiceCreateController", function($scope, $http, $window){
 	$scope.createdDate = new Date();
 	$scope.service = {};
 	$scope.services = [];
-	$scope.init = function(){
-		$http.get("/service/get")
-		    .then(function (response) {
-		    	//$window.location.href = '/login?register';
-		    	$scope.services = response.data;
-		    	$scope.service = $scope.services[0];
-		    	console.log(response);
-		    },
-		    function(errResponse){
-		    	console.log("load services failed!");
-		    	console.log(errResponse);
-		    }
-	    );
-	}
-	
-	$scope.create = function(){
-		var data = {
-				invoiceNo: $scope.invoiceNo,
-				customerCode: $scope.customerCode,
-				amountOfMoney: $scope.amountOfMoney,
-				invoiceNo: $scope.invoiceNo,
-				vat: $scope.vat,
-				createdDate: $scope.createdDate,
-				service: $scope.service
+	$scope.error = {
+		status : 0,
+		data : ""
+	};
+	$scope.init = function() {
+		$http.get("/service/get").then(function(response) {
+			// $window.location.href = '/login?register';
+			$scope.services = response.data;
+			$scope.service = $scope.services[0];
+			console.log(response);
+		}, function(errResponse) {
+			console.log("load services failed!");
+			console.log(errResponse);
+		});
+	};
+
+	$scope.create = function() {
+
+		if (!checkInputValid()) {
+			$scope.error = "400";
+			return;
 		}
-		
-		$http.post("/invoice/create", data)
-	        .then(
-	        function (response) {
-	        	console.log(response);
-	        	//$window.location.href = '/login?register';
-	        },
-	        function(errResponse){
-	        	console.log(errResponse);
-	        	if(errResponse.status == 409){
-	        		$scope.error = "Email already is used!"
-	        	}
-	        	if(errResponse.status == 400){
-	        		$scope.error = "Invalid input!"
-	        	}
-	        });
+
+		var data = {
+			invoiceNo : $scope.invoiceNo,
+			customerCode : $scope.customerCode,
+			amountOfMoney : $scope.amountOfMoney,
+			invoiceNo : $scope.invoiceNo,
+			vat : $scope.vat,
+			createdDate : $scope.createdDate,
+			service : $scope.service
+		}
+
+		$http.post("/invoice/create", data).then(function(response) {
+			$window.location.href = '/invoice';
+		}, function(errResponse) {
+			if (errResponse.status == 409) {
+				$scope.error.status = 409;
+				$scope.error.data = "Duplication of monthly invoice!";
+			} else if (errResponse.status == 400) {
+				$scope.error.status = 400;
+				$scope.error.data = "Bad request!";
+			} else {
+				$scope.error.status = errResponse.status
+				$scope.error.data = "request fail with status: " + errResponse.status;
+			}
+		});
+	};
+
+	function checkInputValid() {
+		if (!$scope.invoiceNo || !$scope.customerCode
+				|| $scope.amountOfMoney < 0 || $scope.vat < 0
+				|| !$scope.service) {
+			return false;
+		}
+		return true;
 	}
 });

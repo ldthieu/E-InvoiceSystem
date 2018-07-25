@@ -15,6 +15,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "invoice")
 public class Invoice implements Serializable {
@@ -31,10 +35,12 @@ public class Invoice implements Serializable {
 	
 	@ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JsonIgnore
     private User user;
 	
 	@ManyToOne(optional = false)
     @JoinColumn(name = "service_id", referencedColumnName = "id")
+	@JsonManagedReference
     private Service service;
 	
 	@Column(name = "invoice_no", nullable = false)
@@ -46,6 +52,17 @@ public class Invoice implements Serializable {
 	@Column(name = "amount_of_money", nullable = false)
 	private double amountOfMoney;
 	
+	@Column(name = "total_money", nullable = false)
+	private double totalMoney;
+	
+	public double getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(double totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+
 	@Column(name = "vat", nullable = false)
 	private double vat;
 	
