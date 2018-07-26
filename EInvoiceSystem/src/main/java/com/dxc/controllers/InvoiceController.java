@@ -53,8 +53,15 @@ public class InvoiceController {
 	
 	@RequestMapping(value = "/invoice/delete/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<Void> deleteService(@PathVariable("id") int id) {
+	public ResponseEntity<Void> deleteInvoice(@PathVariable("id") int id) {
 		return invoiceService.deleteInvoice(id);
+	}
+	
+	@RequestMapping(value = "/invoice/update", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<Void> updateInvoice(@RequestBody Invoice in) {
+
+		return new ResponseEntity<Void>(invoiceService.updateInvoice(in));
 	}
 
 }

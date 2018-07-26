@@ -100,15 +100,48 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	@Override
-	public ResponseEntity<Void> updateInvoice(Invoice invoice) {
+	public HttpStatus updateInvoice(Invoice invoice) {
 		// TODO Auto-generated method stub
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User user = userService.findByEmail(email);
+		if(user == null) {
+			return HttpStatus.UNAUTHORIZED;
+		}
+
+		//	check input valid
+		if (invoice.getCustomerCode() == null || invoice.getInvoiceNo() == null || invoice.getService() == null
+				|| invoice.getAmountOfMoney() < 0 || invoice.getVat() < 0) {
+			return HttpStatus.BAD_REQUEST;
+		}
+
+		//	check invoice exists
 		Invoice in = invoiceRepository.findById(invoice.getId());
 		if (in == null) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			return HttpStatus.BAD_REQUEST;
 		} else {
+			// check service exists
+			Service service = serviceService.findById(invoice.getService().getId());
+			if (service == null) {
+				return HttpStatus.BAD_REQUEST;
+			}
+			
+			// check duplication of monthly invoice
+			if (service.isMonthly() && service.getId() != invoice.getService().getId()) {
+				if (invoiceRepository.findByServiceAndUser(service, user) != null) {
+					return HttpStatus.CONFLICT;
+				}
+			}
+
+			invoice.setTotalMoney(invoice.getAmountOfMoney() + invoice.getVat());
+			invoice.setUser(user);
+			invoice.setService(service);
+
 			invoiceRepository.save(invoice);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+
+			return HttpStatus.OK;
 		}
+
 	}
 
 }

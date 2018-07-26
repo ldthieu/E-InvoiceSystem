@@ -18,5 +18,5 @@ public interface InvoiceService {
 	
 	ResponseEntity<Void> deleteInvoice(int id);
 	
-	ResponseEntity<Void> updateInvoice(Invoice invoice);
+	HttpStatus updateInvoice(Invoice invoice);
 }

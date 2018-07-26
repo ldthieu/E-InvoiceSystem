@@ -3,7 +3,7 @@
  */
 
 // Controller
-app.controller("InvoiceUpdateController", function($scope, $http, $window) {
+app.controller("InvoiceUpdateController", function($scope, $http, $window, $location) {
 
 	$scope.invoiceNo = "";
 	$scope.customerCode = "";
@@ -16,6 +16,7 @@ app.controller("InvoiceUpdateController", function($scope, $http, $window) {
 		status : 0,
 		data : ""
 	};
+	$scope.id = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
 	$scope.init = function() {
 		$http.get("/service/get").then(function(response) {
 			$scope.services = response.data;
@@ -24,9 +25,30 @@ app.controller("InvoiceUpdateController", function($scope, $http, $window) {
 			console.log("load services failed!");
 			console.log(errResponse);
 		});
+		
+		let id = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
+		
+		$http.get("/invoice/get/"+ $scope.id).then(function(response) {
+			console.log(response.data);
+			$scope.id = response.data.id;
+			$scope.invoiceNo = response.data.invoiceNo;
+			$scope.customerCode = response.data.customerCode;
+			$scope.vat = response.data.vat;
+			$scope.createdDate = new Date(response.data.createdDate);
+			$scope.amountOfMoney = response.data.amountOfMoney;
+			for(s of $scope.services){
+				if(s.id == response.data.service.id){
+					$scope.service = s;
+				}
+			}
+		
+		}, function(errResponse) {
+			console.log("load invoice failed!");
+			console.log(errResponse);
+		});
 	};
 
-	$scope.create = function() {
+	$scope.update = function() {
 
 		if (!checkInputValid()) {
 			$scope.error = "400";
@@ -34,6 +56,7 @@ app.controller("InvoiceUpdateController", function($scope, $http, $window) {
 		}
 
 		var data = {
+			id: $scope.id,
 			invoiceNo : $scope.invoiceNo,
 			customerCode : $scope.customerCode,
 			amountOfMoney : $scope.amountOfMoney,
@@ -42,10 +65,8 @@ app.controller("InvoiceUpdateController", function($scope, $http, $window) {
 			createdDate : $scope.createdDate,
 			service : $scope.service
 		}
-		
-		console.log(data);
 
-		$http.post("/invoice/create", data).then(function(response) {
+		$http.put("/invoice/update/", data).then(function(response) {
 			$window.location.href = '/invoice';
 		}, function(errResponse) {
 			console.log(errResponse);
