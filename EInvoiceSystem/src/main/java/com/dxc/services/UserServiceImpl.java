@@ -1,9 +1,11 @@
 package com.dxc.services;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +71,12 @@ public class UserServiceImpl implements UserService {
 			userRepository.save(user);
 			return HttpStatus.OK;
 		}
+	}
+
+	@Override
+	public ResponseEntity<List<User>> getMemberList() {
+		// TODO Auto-generated method stub
+		return new ResponseEntity<List<User>>(userRepository.getMemberList(), HttpStatus.OK);
 	}
 
 }

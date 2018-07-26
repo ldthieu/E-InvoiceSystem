@@ -70,7 +70,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Update Invoice</h2>
+						<h2>Change User State</h2>
 						<!-- 						<h5>Welcome Jhon Deo , Love to see you back.</h5> -->
 					</div>
 				</div>
@@ -80,58 +80,31 @@
 					<div class="col-md-12">
 						<!-- Form Elements -->
 						<div class="panel panel-default">
-							<div class="panel-heading"><a href="/invoice">Back to list</a></div>
+							<div class="panel-heading"><a href="#">Back to dashboard</a></div>
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-6">
 										<!-- 										<h3>Basic Form Examples</h3> -->
 										<form role="form">
-											<p class="help-block" style="color: red"
-												ng-if="error.status != 0">{{error.data}}</p>
+											<p class="help-block" style="color: blue"
+												ng-if="status != 0">Change user state success!</p>
 											<div class="form-group" ng-init="init()">
-												<label>Select Service</label> <select class="form-control"
-													ng-model="service"
-													ng-options="s.serviceName for s in services">
+												<label>Select User</label> <select class="form-control"
+													ng-model="user"
+													ng-options="u.fullname for u in users">
 												</select>
 											</div>
 											<div class="form-group">
 												<label class="checkbox-inline"> <input
-													type="checkbox" ng-model="service.monthly" disabled /> is
-													monthly
+													type="checkbox" ng-model="user.active"/> is
+													active
 												</label>
 											</div>
-											<div class="form-group">
-												<label>Invoice No.</label> <input class="form-control"
-													type="text" placeholder="PLease enter Invoice No."
-													ng-model="invoiceNo" required />
-											</div>
-											<div class="form-group">
-												<label>Customer Code</label> <input class="form-control"
-													type="text" placeholder="PLease enter Customer Code"
-													ng-model="customerCode" required />
-											</div>
-											<label>Amount Of Money</label>
-											<div class="form-group input-group">
-												<!-- 												<label>VAT</label> -->
-												<span class="input-group-addon">$</span> <input
-													class="form-control" type="number" ng-model="amountOfMoney" />
-												<span class="input-group-addon">.00</span>
-											</div>
-											<label>VAT</label>
-											<div class="form-group input-group">
-												<!-- 												<label>VAT</label> -->
-												<span class="input-group-addon">$</span> <input
-													class="form-control" type="number" ng-model="vat" /> <span
-													class="input-group-addon">.00</span>
-											</div>
-											<div class="form-group">
-												<label>Invoice date</label> <input class="form-control"
-													type="date" ng-model="createdDate" />
-											</div>
+											
 											<button type="submit" class="btn btn-default"
 												ng-click="update()">Submit Button</button>
-											<button type="reset" class="btn btn-primary">Reset
-												Button</button>
+<!-- 											<button type="reset" class="btn btn-primary">Reset -->
+<!-- 												Button</button> -->
 										</form>
 									</div>
 								</div>

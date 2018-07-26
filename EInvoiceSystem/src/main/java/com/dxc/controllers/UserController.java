@@ -1,5 +1,7 @@
 package com.dxc.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,5 +38,12 @@ public class UserController {
 	public ResponseEntity<Void> changeState(@RequestBody User req) {
 	
 		return new ResponseEntity<Void>(userService.changeUserState(req));
+	}
+	
+	@RequestMapping(value = "/user/get", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<User>> getMemberUser() {
+
+		return userService.getMemberList();
 	}
 }

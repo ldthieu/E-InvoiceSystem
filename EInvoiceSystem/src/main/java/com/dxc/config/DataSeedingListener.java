@@ -80,7 +80,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			User user = new User();
 			user.setEmail("bvn@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456"));
-			user.setFullname("member");
+			user.setFullname("Bui Viet Ngu");
 			HashSet<Role> roles = new HashSet<>();
 			roles.add(roleRepository.findByName("ROLE_MEMBER"));
 			user.setRoles(roles);
@@ -92,7 +92,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			User user = new User();
 			user.setEmail("ldth@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456"));
-			user.setFullname("member");
+			user.setFullname("Luu Dang Trung Hieu");
 			HashSet<Role> roles = new HashSet<>();
 			roles.add(roleRepository.findByName("ROLE_MEMBER"));
 			user.setRoles(roles);
