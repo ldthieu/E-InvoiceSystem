@@ -92,4 +92,9 @@ public class MainController {
 	public String userState() {
 		return "user-state";
 	}
+	
+	@GetMapping("/report")
+	public String report() {
+		return "report";
+	}
 }

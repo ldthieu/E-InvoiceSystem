@@ -59,5 +59,13 @@ public class InvoiceController {
 
 		return new ResponseEntity<Void>(invoiceService.updateInvoice(in));
 	}
+	
+	@RequestMapping(value = "/invoice/report/{id}/{start}/{end}", method = RequestMethod.GET)
+//	@RequestMapping(value = "/invoice/report?id={id}&start={start}&end={end}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<Invoice>> getReport(@PathVariable("id") int id, @PathVariable("start") long start,
+			@PathVariable("end") long end ) {
+		return invoiceService.getInvoiceListByDate(id, start, end);
+	}
 
 }

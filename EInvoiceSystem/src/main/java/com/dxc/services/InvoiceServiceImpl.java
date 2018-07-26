@@ -1,5 +1,6 @@
 package com.dxc.services;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -142,6 +143,26 @@ public class InvoiceServiceImpl implements InvoiceService {
 			return HttpStatus.OK;
 		}
 
+	}
+
+	@Override
+	public ResponseEntity<List<Invoice>> getInvoiceListByDate(int service, long start, long end) {
+		// TODO Auto-generated method stub
+		System.out.println("i'm here");
+		Date dateStart = new Date(start);
+		Date dateEnd = new Date(end);
+		System.out.println(start);
+		System.out.println(end);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User user = userService.findByEmail(email);
+		if(user == null) {
+			return new ResponseEntity<List<Invoice>>(HttpStatus.UNAUTHORIZED);
+		}
+		
+		List<Invoice> lst = invoiceRepository.getInvoiceByServiceAndDate(service, user.getId(),dateStart, dateEnd);
+		return new ResponseEntity<List<Invoice>>(lst, HttpStatus.OK);
 	}
 
 }

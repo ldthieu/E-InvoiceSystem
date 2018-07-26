@@ -19,4 +19,6 @@ public interface InvoiceService {
 	ResponseEntity<Void> deleteInvoice(int id);
 	
 	HttpStatus updateInvoice(Invoice invoice);
+	
+	ResponseEntity<List<Invoice>> getInvoiceListByDate(int service, long start, long end);
 }

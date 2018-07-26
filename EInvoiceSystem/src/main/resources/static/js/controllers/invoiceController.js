@@ -7,12 +7,12 @@
 //	Controller
 app.controller("InvoiceController", function($scope, $http, $window, $timeout){
 	
-	$scope.services = [];
+	$scope.invoices = [];
 	$scope.getInvoice = function(){
 		$http.get("/invoice/get")
 		    .then(function (response) {
 		    	console.log(response);
-		    	$scope.services = response.data;
+		    	$scope.invoices = response.data;
 		    },
 		    function(errResponse){
 		    	console.log(errResponse);

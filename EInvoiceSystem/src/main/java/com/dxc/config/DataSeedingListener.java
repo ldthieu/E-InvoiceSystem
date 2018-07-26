@@ -1,15 +1,20 @@
 package com.dxc.config;
 
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.dxc.models.Invoice;
 import com.dxc.models.Role;
 import com.dxc.models.Service;
 import com.dxc.models.User;
+import com.dxc.repository.InvoiceRepository;
 import com.dxc.repository.RoleRepository;
 import com.dxc.repository.ServiceRepository;
 import com.dxc.repository.UserRepository;
@@ -25,6 +30,9 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 
 	@Autowired
 	private ServiceRepository serviceRepository;
+	
+	@Autowired
+	private InvoiceRepository invoiceRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -98,6 +106,13 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			user.setRoles(roles);
 			userRepository.save(user);		
 		}
+		
+		Date endDate = new Date();
+		endDate.setDate(28);
+		System.out.println("***************************************");
+		List<Invoice> lst = invoiceRepository.getInvoiceByServiceAndDate(1,1,new Date(), endDate);
+		System.out.println(lst.size());
+		System.out.println("***************************************");
 		
 	}
 
