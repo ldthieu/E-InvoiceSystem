@@ -15,5 +15,6 @@ public interface ServiceRepository extends CrudRepository<Service, Integer>, Jpa
 	List <Service> findByUserOrUser(User admin,User user);
 	Service findByServiceName(String serviceName);
 	Service findById(int id);
+	Service findByIdAndUser(int Id, User user);
 	Service findByServiceNameAndUser(String serviceName, User user);
 }

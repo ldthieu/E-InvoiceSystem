@@ -90,7 +90,7 @@ public class ServiceController {
 			return HttpStatus.NO_CONTENT;
 		}
 
-		Service service = serviceRepository.findById(ser.getId());
+		Service service = serviceRepository.findByIdAndUser(ser.getId(),getUser());
 
 		if (service != null) {
 
@@ -99,9 +99,9 @@ public class ServiceController {
 			service.setMonthly(ser.isMonthly());
 			serviceService.updateService(service);
 
-			return HttpStatus.CREATED;
+			return HttpStatus.ACCEPTED;
 		} else {
-			return HttpStatus.CONFLICT;
+			return HttpStatus.NOT_MODIFIED;
 		}
 
 	}
