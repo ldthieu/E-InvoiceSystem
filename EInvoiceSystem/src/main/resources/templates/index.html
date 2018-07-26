@@ -1,16 +1,293 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+﻿<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Index Page</title>
-<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free Bootstrap Admin Template : Binary Admin</title>
+<!-- BOOTSTRAP STYLES-->
+<link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}"
+	rel="stylesheet" />
+<!-- FONTAWESOME STYLES-->
+<link href="../static/css/font-awesome.css" rel="stylesheet"
+	th:href="@{/css/font-awesome.css}" />
+<!-- MORRIS CHART STYLES-->
+<link href="../static/js/morris/morris-0.4.3.min.css"
+	th:href="@{/js/morris/morris-0.4.3.min.css}" rel="stylesheet" />
+<!-- CUSTOM STYLES-->
+<link href="../static/css/custom.css" th:href="@{/css/custom.css}"
+	rel="stylesheet" />
+<!-- GOOGLE FONTS-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}"
+	rel='stylesheet' type='text/css' />
+<!-- TABLE STYLES-->
+<link href="../static/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" th:href="@{/js/dataTables/dataTables.bootstrap.css}" />
+
+<!--======================================  ANGULAR ================================================-->
+<script src="../static/js/lib/angular.js" th:src="@{/js/lib/angular.js}"></script>
+<!--================================================================================================-->
+
 </head>
-<body>
-	Logged user: <span sec:authentication="name"></span> <br/> 
-	Roles: <span sec:authentication="principal.authorities"></span>
-	<form action="#" th:action="@{/logout}" method="POST">
-		<button type="submit">Logout</button>
-	</form>
+<body ng-app="myApp">
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">EInvoice System</a>
+			</div>
+			<div
+				style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+				Last access : 30 May 2014 &nbsp; <a href="/logout"
+					class="btn btn-danger square-btn-adjust">Logout</a>
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li class="text-center"><img src="../static/img/find_user.png"
+						th:src="@{/img/find_user.png}" class="user-image img-responsive" />
+					</li>
+					<li><a class="active-menu" href="/"><i
+							class="fa fa-dashboard fa-3x"></i> Dashboard</a></li>
+					<li><a href="/service"><i class="fa fa-bars fa-3x"></i>
+							Service</a></li>
+					<li><a href="/invoice"><i class="fa fa-table fa-3x"></i>
+							Invoice</a></li>
+					<li><a href="/chart"><i class="fa fa-bar-chart-o fa-3x"></i>
+							Chart</a></li>
+					<li><a href="/user/state"><i class="fa fa-user fa-3x"></i>
+							User</a></li>
+				</ul>
+
+			</div>
+
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Dashboard</h2>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<hr />
+				<div class="row">
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="panel panel-back noti-box">
+							<a href="/service"> <span
+								class="icon-box bg-color-red set-icon"> <i
+									class="fa fa-bars"></i>
+							</span>
+							</a>
+							<div class="text-box">
+								<p class="main-text">Service</p>
+								<p class="text-muted">Manage</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="panel panel-back noti-box">
+							<a href="/invoice"> <span
+								class="icon-box bg-color-green set-icon"> <i
+									class="fa fa-table"></i>
+							</span>
+							</a>
+
+							<div class="text-box">
+								<p class="main-text">Invoice</p>
+								<p class="text-muted">Manage</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="panel panel-back noti-box">
+							<span class="icon-box bg-color-blue set-icon"> <i
+								class="fa fa-bell-o"></i>
+							</span>
+							<div class="text-box">
+								<p class="main-text">Report</p>
+								<p class="text-muted">View</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="panel panel-back noti-box">
+							<a href="/chart"> <span
+								class="icon-box bg-color-brown set-icon"> <i
+									class="fa fa-bar-chart-o"></i>
+							</span>
+							</a>
+
+							<div class="text-box">
+								<p class="main-text">Chart</p>
+								<p class="text-muted">View</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<hr />
+				<div class="row" ng-controller="ServiceController">
+					<div class="col-md-12">
+						<!-- Advanced Tables -->
+						<div class="panel panel-default">
+							<div class="panel-heading"><a href="/service">Service</a></div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-hover"
+										id="dataTables-example1">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Name</th>
+												<th>Monthly</th>
+												<th>Edit</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- $scope.employees -->
+											<tr ng-repeat="service in services">
+												<td>{{ service.id }}</td>
+												<td>{{ service.serviceName }}</td>
+												<td>{{ service.monthly }}</td>
+												<td><a ng-click="editService(service)"
+													class="edit-button">Edit</a></td>
+												<td><a ng-click="deleteService(service)"
+													class="delete-button">Delete</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+						<!--End Advanced Tables -->
+					</div>
+				</div>
+				<hr />
+				<div class="row" ng-controller="InvoiceController"
+					ng-init="getInvoice()">
+					<div class="col-md-12">
+						<!-- Advanced Tables -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<a href="/invoice">Invoice</a>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-hover"
+										id="dataTables-example">
+										<thead>
+											<tr>
+												<th>Invoice No.</th>
+												<th>Customer Code</th>
+												<th>Service</th>
+												<th>Amount Of Money</th>
+												<th>VAT</th>
+												<th>Total money</th>
+												<th>Charged period</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="s in services" class="odd gradeX">
+												<td>{{s.invoiceNo}}</td>
+												<td>{{s.customerCode}}</td>
+												<td>{{s.service.serviceName}}</td>
+												<td class="center">{{s.amountOfMoney}}</td>
+												<td class="center">{{s.vat}}</td>
+												<td class="center">{{s.totalMoney}}</td>
+												<td class="center" ng-if="s.service.monthly">monthly</td>
+												<td class="center" ng-if="!s.service.monthly">none</td>
+												<td><a href="/invoice/update/{{s.id}}">edit</a> <a
+													href="" ng-click="delete(s.id)">delete</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+						<!--End Advanced Tables -->
+					</div>
+				</div>
+
+				<hr />
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Bar Chart</div>
+							<div class="panel-body">
+								<div id="morris-bar-chart"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Pie Chart</div>
+							<div class="panel-body">
+								<div id="morris-donut-chart"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /. ROW  -->
+			</div>
+			<!-- /. PAGE INNER  -->
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+	<!-- /. WRAPPER  -->
+	<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+	<!-- JQUERY SCRIPTS -->
+	<script src="../static/js/jquery-1.10.2.js"
+		th:src="@{/js/jquery-1.10.2.js}"></script>
+	<!-- BOOTSTRAP SCRIPTS -->
+	<script src="../static/js/bootstrap.min.js"
+		th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- METISMENU SCRIPTS -->
+	<script src="../static/js/jquery.metisMenu.js"
+		th:src="@{/js/jquery.metisMenu.js}"></script>
+	<!-- MORRIS CHART SCRIPTS -->
+	<script src="../static/js/morris/raphael-2.1.0.min.js"
+		th:src="@{/js/morris/raphael-2.1.0.min.js}"></script>
+	<script src="../static/js/morris/morris.js"
+		th:src="@{/js/morris/morris.js}"></script>
+	<!-- CUSTOM SCRIPTS -->
+
+	<!-- DATA TABLE SCRIPTS -->
+	<script src="../static/js/dataTables/jquery.dataTables.js"
+		th:src="@{/js/dataTables/jquery.dataTables.js}"></script>
+	<script src="../static/js/dataTables/dataTables.bootstrap.js"
+		th:src="@{/js/dataTables/dataTables.bootstrap.js}"></script>
+	<script src="../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').dataTable();
+			setTimeout(function() {
+				$('#dataTables-example1').dataTable();
+			}, 3000);
+		});
+	</script>
+
+	<!--===============================================    Angular    ================================================================-->
+	<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+	<script src="../static/js/controllers/invoiceController.js"
+		th:src="@{/js/controllers/invoiceController.js}"></script>
+		<script src="../static/js/controllers/serviceController.js"
+		th:src="@{/js/controllers/serviceController.js}"></script>
+	<!--===============================================    End Angular  ==============================================================-->
+
 </body>
 </html>

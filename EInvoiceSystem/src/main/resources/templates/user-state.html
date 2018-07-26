@@ -34,7 +34,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">EInvoice System</a>
+				<a class="navbar-brand" href="/">EInvoice System</a>
 			</div>
 			<div
 				style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
@@ -46,21 +46,25 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
-					<li class="text-center"><img src="static/img/find_user.png"
-						th:src="@{/img/find_user.png}" class="user-image img-responsive" /></li>
-
-
-					<li><a href="index.html"><i class="fa fa-dashboard fa-3x"></i>
-							Dashboard</a></li>
-					<li><a href="ui.html"><i class="fa fa-desktop fa-3x"></i>
-							UI Elements</a></li>
-					<li><a href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i>
-							Tabs & Panels</a></li>
-					<li><a href="chart.html"><i
-							class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a></li>
-					<li><a class="active-menu" href="/invoice"><i
-							class="fa fa-table fa-3x"></i> Invoice </a></li>
-				</ul>
+					<li class="text-center">
+                    	<img src="../static/img/find_user.png" th:src="@{/img/find_user.png}" class="user-image img-responsive"/>
+					</li>	
+                    <li>
+                        <a  href="/"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a  href="/service"><i class="fa fa-bars fa-3x"></i> Service</a>
+                    </li>
+                    <li  >
+                        <a	href="/invoice"><i class="fa fa-table fa-3x"></i> Invoice</a>
+                    </li>
+				   	<li>
+                        <a  href="/chart"><i class="fa fa-bar-chart-o fa-3x"></i> Chart</a>
+                    </li>	
+                   	<li>
+                        <a  class="active-menu"	href="/user/state"><i class="fa fa-user fa-3x"></i> User</a>
+                    </li>
+                </ul>
 
 			</div>
 

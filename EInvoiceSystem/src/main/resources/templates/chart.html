@@ -1,160 +1,124 @@
 ﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-      <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Bootstrap Admin Template : Binary Admin</title>
-	<!-- BOOTSTRAP STYLES-->
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-     <!-- FONTAWESOME STYLES-->
-    <link href="../static/css/font-awesome.css" rel="stylesheet" th:href="@{/css/font-awesome.css}"/>
-     <!-- MORRIS CHART STYLES-->
-    <link href="../static/js/morris/morris-0.4.3.min.css" rel="stylesheet" th:href="@{/js/morris/morris-0.4.3.min.css}"/>
-        <!-- CUSTOM STYLES-->
-    <link href="../static/css/custom.css" rel="stylesheet" th:href="@{/css/custom.css}"/>
-     <!-- GOOGLE FONTS-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' 
-   		th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free Bootstrap Admin Template : Binary Admin</title>
+<!-- BOOTSTRAP STYLES-->
+<link href="../static/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}" />
+<!-- FONTAWESOME STYLES-->
+<link href="../static/css/font-awesome.css" rel="stylesheet"
+	th:href="@{/css/font-awesome.css}" />
+<!-- MORRIS CHART STYLES-->
+<link href="../static/js/morris/morris-0.4.3.min.css" rel="stylesheet"
+	th:href="@{/js/morris/morris-0.4.3.min.css}" />
+<!-- CUSTOM STYLES-->
+<link href="../static/css/custom.css" rel="stylesheet"
+	th:href="@{/css/custom.css}" />
+<!-- GOOGLE FONTS-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css'
+	th:href="@{http://fonts.googleapis.com/css?family=Open+Sans}" />
 </head>
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Binary admin</a> 
-            </div>
-  <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
-        </nav>   
-           <!-- /. NAV TOP  -->
-                <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-				<li class="text-center">
-                    <img src="../static/img/find_user.png" th:src="@{/img/find_user.png}" class="user-image img-responsive"/>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">EInvoice System</a>
+			</div>
+			<div
+				style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+				Last access : 30 May 2014 &nbsp; <a href="/logout"
+					class="btn btn-danger square-btn-adjust">Logout</a>
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li class="text-center"><img src="../static/img/find_user.png"
+						th:src="@{/img/find_user.png}" class="user-image img-responsive" />
 					</li>
-				
-					
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
-                    </li>
-                    <li>
-                        <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
-                    </li>
-						   <li  >
-                        <a class="active-menu"   href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
-                    </li>	
-                      <li  >
-                        <a  href="table.html"><i class="fa fa-table fa-3x"></i> Table Examples</a>
-                    </li>
-                    <li  >
-                        <a  href="form.html"><i class="fa fa-edit fa-3x"></i> Forms </a>
-                    </li>				
-					
-					                   
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
+					<li><a href="/"><i class="fa fa-dashboard fa-3x"></i>
+							Dashboard</a></li>
+					<li><a href="/service"><i class="fa fa-bars fa-3x"></i>
+							Service</a></li>
+					<li><a href="/invoice"><i class="fa fa-table fa-3x"></i>
+							Invoice</a></li>
+					<li><a class="active-menu" href="/chart"><i
+							class="fa fa-bar-chart-o fa-3x"></i> Chart</a></li>
+					<li><a href="/user/state"><i class="fa fa-user fa-3x"></i>
+							User</a></li>
+				</ul>
 
-                                </ul>
-                               
-                            </li>
-                        </ul>
-                      </li>  
-                  <li  >
-                        <a  href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
-                    </li>	
-                </ul>
-               
-            </div>
-            
-        </nav>  
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
-            <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                     <h2>Morris Charts</h2>   
-<!--                         <h5>Welcome Jhon Deo , Love to see you back. </h5> -->
-                       
-                    </div>
-                </div>
-                 <!-- /. ROW  -->
-                 <hr />
-             
-                <div class="row"> 
-                    
-                      
-                               <div class="col-md-6 col-sm-12 col-xs-12">                     
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Bar Chart
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-bar-chart"></div>
-                        </div>
-                    </div>            
-                </div>
-                      <div class="col-md-6 col-sm-12 col-xs-12">                     
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Pie Chart
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                        </div>
-                    </div>            
-                </div>
-                
-           </div>
-                 <!-- /. ROW  -->
-    </div>
-             <!-- /. PAGE INNER  -->
-            </div>
-         <!-- /. PAGE WRAPPER  -->
-        </div>
-     <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="../static/js/jquery-1.10.2.js" th:src="@{/js/jquery-1.10.2.js}"></script>
-      <!-- BOOTSTRAP SCRIPTS -->
-    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="../static/js/jquery.metisMenu.js" th:src="@{/js/jquery.metisMenu.js}"></script>
-     <!-- MORRIS CHART SCRIPTS -->
-     <script src="../static/js/morris/raphael-2.1.0.min.js" th:src="@{/js/morris/raphael-2.1.0.min.js}"></script>
-    <script src="../static/js/morris/morris.js" th:src="@{/js/morris/morris.js}"></script>
-      <!-- CUSTOM SCRIPTS -->
-    <script src="../static/js/custom.js" th:src="@{/js/custom.js}"></script>
-    
-   
+			</div>
+
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Morris Charts</h2>
+						<!--                         <h5>Welcome Jhon Deo , Love to see you back. </h5> -->
+
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<hr />
+
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Bar Chart</div>
+							<div class="panel-body">
+								<div id="morris-bar-chart"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Pie Chart</div>
+							<div class="panel-body">
+								<div id="morris-donut-chart"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /. ROW  -->
+			</div>
+			<!-- /. PAGE INNER  -->
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+	<!-- /. WRAPPER  -->
+	<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+	<!-- JQUERY SCRIPTS -->
+	<script src="../static/js/jquery-1.10.2.js"
+		th:src="@{/js/jquery-1.10.2.js}"></script>
+	<!-- BOOTSTRAP SCRIPTS -->
+	<script src="../static/js/bootstrap.min.js"
+		th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- METISMENU SCRIPTS -->
+	<script src="../static/js/jquery.metisMenu.js"
+		th:src="@{/js/jquery.metisMenu.js}"></script>
+	<!-- MORRIS CHART SCRIPTS -->
+	<script src="../static/js/morris/raphael-2.1.0.min.js"
+		th:src="@{/js/morris/raphael-2.1.0.min.js}"></script>
+	<script src="../static/js/morris/morris.js"
+		th:src="@{/js/morris/morris.js}"></script>
+	<!-- CUSTOM SCRIPTS -->
+	<script src="../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+
 </body>
 </html>

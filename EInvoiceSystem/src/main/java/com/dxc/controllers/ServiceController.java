@@ -21,8 +21,6 @@ import com.dxc.models.User;
 import com.dxc.repository.ServiceRepository;
 import com.dxc.repository.UserRepository;
 import com.dxc.services.ServiceService;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @RestController
 public class ServiceController {
