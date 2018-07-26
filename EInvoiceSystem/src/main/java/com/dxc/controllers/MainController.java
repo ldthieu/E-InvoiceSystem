@@ -67,4 +67,9 @@ public class MainController {
 	    }
 	    return "redirect:/login?logout";
 	}
+	
+	@GetMapping("/chart")
+	public String chart() {
+		return "chart";
+	}
 }
