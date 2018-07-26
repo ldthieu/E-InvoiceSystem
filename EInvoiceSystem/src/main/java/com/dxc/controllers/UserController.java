@@ -30,4 +30,11 @@ public class UserController {
 	
 		return new ResponseEntity<Void>(userService.register(req));
 	}
+	
+	@RequestMapping(value = "/user/state", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<Void> changeState(@RequestBody User req) {
+	
+		return new ResponseEntity<Void>(userService.changeUserState(req));
+	}
 }

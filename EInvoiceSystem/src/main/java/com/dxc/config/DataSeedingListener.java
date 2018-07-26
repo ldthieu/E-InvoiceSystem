@@ -1,7 +1,6 @@
 package com.dxc.config;
 
 import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -14,7 +13,6 @@ import com.dxc.models.User;
 import com.dxc.repository.RoleRepository;
 import com.dxc.repository.ServiceRepository;
 import com.dxc.repository.UserRepository;
-import com.dxc.services.UserService;
 
 @Component
 public class DataSeedingListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -48,6 +46,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			admin.setEmail("admin@gmail.com");
 			admin.setPassword(passwordEncoder.encode("123456"));
 			admin.setFullname("admin");
+			admin.setActive(true);
 			HashSet<Role> roles = new HashSet<>();
 			roles.add(roleRepository.findByName("ROLE_ADMIN"));
 			roles.add(roleRepository.findByName("ROLE_MEMBER"));
@@ -97,9 +96,9 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			HashSet<Role> roles = new HashSet<>();
 			roles.add(roleRepository.findByName("ROLE_MEMBER"));
 			user.setRoles(roles);
-			userRepository.save(user);
-			
+			userRepository.save(user);		
 		}
+		
 	}
 
 }

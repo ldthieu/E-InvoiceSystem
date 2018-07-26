@@ -4,19 +4,34 @@ package com.dxc.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import com.dxc.repository.UserRepository;
 
 @Controller
 public class MainController {
 	
+	@Autowired
+	UserRepository userRepository;
+	
 	@GetMapping("/")
 	public String index() {
-		return "index";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		
+		if (username != "anonymousUser") {
+			boolean isActive = userRepository.findByEmail(username).isActive();
+			System.out.println(isActive);
+			if (isActive) {
+				return "index";
+			}
+		}
+		return "redirect:/login?unauthorized";
 	}
 	
 	@GetMapping("/admin") 
@@ -32,7 +47,7 @@ public class MainController {
 	@GetMapping("/login") 
 	public String getLogin() {
 		return "login";
-	}
+	} 
 	
 	@GetMapping("/register") 
 	public String register() {
@@ -71,5 +86,10 @@ public class MainController {
 	@GetMapping("/chart")
 	public String chart() {
 		return "chart";
+	}
+	
+	@GetMapping("/user/state")
+	public String userState() {
+		return "user-state";
 	}
 }

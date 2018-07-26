@@ -3,7 +3,6 @@ package com.dxc.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dxc.models.Invoice;
-import com.dxc.models.Service;
-import com.dxc.models.User;
 import com.dxc.services.InvoiceService;
 import com.dxc.services.UserService;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @RestController
 public class InvoiceController {

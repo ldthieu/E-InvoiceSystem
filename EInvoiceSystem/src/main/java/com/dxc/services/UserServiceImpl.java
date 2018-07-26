@@ -58,4 +58,17 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public HttpStatus changeUserState(User req) {
+		// TODO Auto-generated method stub
+		User user = userRepository.findByEmail(req.getEmail());
+		if (user == null) {
+			return HttpStatus.BAD_REQUEST;
+		} else {
+			user.setActive(req.isActive());
+			userRepository.save(user);
+			return HttpStatus.OK;
+		}
+	}
+
 }
