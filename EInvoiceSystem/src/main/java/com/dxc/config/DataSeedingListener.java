@@ -107,12 +107,12 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			userRepository.save(user);		
 		}
 		
-		Date endDate = new Date();
-		endDate.setDate(28);
-		System.out.println("***************************************");
-		List<Invoice> lst = invoiceRepository.getInvoiceByServiceAndDate(1,1,new Date(), endDate);
-		System.out.println(lst.size());
-		System.out.println("***************************************");
+//		Date endDate = new Date();
+//		endDate.setDate(28);
+//		System.out.println("***************************************");
+//		List<Invoice> lst = invoiceRepository.getInvoiceByServiceAndDate(1,1,new Date(), endDate);
+//		System.out.println(lst.size());
+//		System.out.println("***************************************");
 		
 	}
 
